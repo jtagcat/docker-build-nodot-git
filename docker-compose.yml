@@ -4,4 +4,6 @@ services:
     build: https://github.com/jtagcat/dbndg#main
     environment:
       - DESTINATION_BASE=https://git.sr.ht
+    expose:
+      - 8080
     restart: unless-stopped
