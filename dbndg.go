@@ -33,10 +33,14 @@ func main() {
 	destBase := os.Getenv(destEnvName)
 	_, err := url.ParseRequestURI(destBase)
 	if err != nil {
-		log.Fatal(fmt.Errorf("couldn't parse %s as URL: %v", destEnvName, err))
+		log.Fatal(fmt.Errorf("couldn't parse %s as URL: %w", destEnvName, err))
 	}
 
 	r := setupRouter(destBase)
+
 	// Listen and Server in 0.0.0.0:8080
-	r.Run(":8080")
+	err = r.Run(":8080")
+	if err != nil {
+		log.Fatal(fmt.Errorf("couldn't start gin: %w", err))
+	}
 }
