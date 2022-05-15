@@ -1,7 +1,7 @@
 services:
   dbndg:
     image: dbndg:build
-    build: https://github.com/jtagcat/dbndg#main
+    build: https://github.com/jtagcat/docker-build-nodot-git.git#main
     environment:
       - DESTINATION_BASE=https://git.sr.ht
     expose:
