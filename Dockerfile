@@ -10,14 +10,12 @@ RUN go mod download
 # https://github.com/docker/docker.github.io/issues/14609
 COPY *.go ./
 #COPY . ./
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o docker-build-nodot-git
 
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM alpine
 LABEL org.opencontainers.image.source="https://github.com/jtagcat/docker-build-nodot-git"
 WORKDIR /wd
-RUN apk add --no-cache git
-RUN git config --global --add safe.directory '*'
 
-COPY --from=builder /wd/app ./
-CMD ["./app"]
+COPY --from=builder /wd/docker-build-nodot-git ./
+CMD ["./docker-build-nodot-git"]
