@@ -19,3 +19,4 @@ WORKDIR /wd
 
 COPY --from=builder /wd/docker-build-nodot-git ./
 CMD ["./docker-build-nodot-git"]
+EXPOSE 8080
